@@ -27,13 +27,21 @@ public class ScoreManager : MonoBehaviour
     public Text Ranking3;
     public Text Ranking4;
 
+  
+
     public GameObject highScore;
 
 
     private int Ranking;
+    private int rankingup;
+    private int rankingdown;
+    private int rankingleft;
+    private int rankingright;
 
-
-   
+    public GameObject wallleft;
+    public GameObject wallright;
+    public GameObject wallup;
+    public GameObject walldown;
 
     public void AddRightScore(int increment)
     {
@@ -48,23 +56,35 @@ public class ScoreManager : MonoBehaviour
 
             if (Ranking == 1)
             {
+                rankingright++;
                 Ranking4.text = ("Green");
             }
 
             else if (Ranking == 2)
             {
+                rankingright++;
                 Ranking3.text = ("Green");
             }
 
             else if (Ranking == 3)
             {
+                rankingright++;
                 Ranking2.text = ("Green");
-            }
+                
 
-            else if (Ranking > 3)
+                GameOver();
+            }
+            else if (Ranking == 4)
             {
                 Ranking1.text = ("Green");
                 GameOver();
+            }
+
+            if (rankingright == 0)
+            {
+                
+                Ranking1.text = ("Green");
+                
             }
         }
 
@@ -84,20 +104,34 @@ public class ScoreManager : MonoBehaviour
 
             if (Ranking == 1)
             {
+                rankingleft++;
                 Ranking4.text = ("Blue");
             }
             else if (Ranking == 2)
             {
+                rankingleft++;
                 Ranking3.text = ("Blue");
             }
             else if (Ranking == 3)
             {
+                rankingleft++;
                 Ranking2.text = ("Blue");
+                
+                GameOver();
+                
             }
+
             else if (Ranking == 4)
             {
                 Ranking1.text = ("Blue");
                 GameOver();
+            }
+
+            if (rankingleft == 0)
+            {
+                
+                Ranking1.text = ("Blue");
+                
             }
 
         }
@@ -118,20 +152,33 @@ public class ScoreManager : MonoBehaviour
 
             if (Ranking == 1)
             {
+                rankingup++;
                 Ranking4.text = ("Red");
             }
             else if (Ranking == 2)
             {
+                rankingup++;
                 Ranking3.text = ("Red");
             }
             else if (Ranking == 3)
             {
+                rankingup++;
                 Ranking2.text = ("Red");
+                
+                GameOver();
             }
+
             else if (Ranking == 4)
             {
                 Ranking1.text = ("Red");
                 GameOver();
+            }
+
+            if (rankingup == 0) 
+            {
+               
+                Ranking1.text = ("Red");
+                
             }
         }
 
@@ -146,27 +193,35 @@ public class ScoreManager : MonoBehaviour
         {
             downWall.SetActive(true);
             Ranking++;
-            
-            if (Ranking == 0)
-            {
-
-            }
+           
             if (Ranking == 1)
             {
+                rankingdown++;
                 Ranking4.text = ("Yellow");
             }
             else if (Ranking == 2)
             {
+                rankingdown++;
                 Ranking3.text = ("Yellow");
             }
             else if (Ranking == 3)
             {
+                rankingdown++;
                 Ranking2.text = ("Yellow");
+                
+                GameOver();
             }
+
             else if (Ranking == 4)
             {
                 Ranking1.text = ("Yellow");
                 GameOver();
+            }
+
+            if (rankingdown == 0)
+            {
+                Ranking1.text = ("Yellow");
+               
             }
         }
 
@@ -176,13 +231,27 @@ public class ScoreManager : MonoBehaviour
 
     public void GameOver()
     {
-        highScore.SetActive(true);
+       
+
+        StartCoroutine(waitTime());
+       
+
         //SceneManager.LoadScene("Score");
+    }
+
+    IEnumerator waitTime()
+    {
+        yield return new WaitForSeconds(1);
+
+        Time.timeScale = 0;
+        highScore.SetActive(true);
     }
     // Start is called before the first frame update
     void Start()
     {
+        Time.timeScale = 1;
         Ranking = 0;
+
 
         upWall.SetActive(false);
         downWall.SetActive(false);
@@ -195,6 +264,28 @@ public class ScoreManager : MonoBehaviour
 
 
     // Update is called once per frame
-  
- 
+    private void FixedUpdate()
+    {
+        if(rankingup != 1)
+        {
+            Ranking1.text = ("Red");
+        }
+
+        if (rankingdown!= 1)
+        {
+            Ranking1.text = ("Yellow");
+        }
+
+        if (rankingright != 1)
+        {
+            Ranking1.text = ("Green");
+        }
+
+        if (rankingleft != 1)
+        {
+            Ranking1.text = ("Blue");
+        }
+
+    }
+
 }
