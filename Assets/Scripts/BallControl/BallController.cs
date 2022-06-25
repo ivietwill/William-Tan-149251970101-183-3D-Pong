@@ -31,8 +31,6 @@ public class BallController : MonoBehaviour
     private Transform[] spawnLocation;
 
 
-    
-
     [SerializeField]
     private SphereCollider ball;
 
@@ -40,7 +38,10 @@ public class BallController : MonoBehaviour
     //public GameObject ball;
 
     //Test Lerp
+    [SerializeField]
     public Transform target;
+
+
 
 
 
@@ -118,6 +119,10 @@ public class BallController : MonoBehaviour
     }
 
 
+    IEnumerator tes()
+    {
+        yield return new WaitForSeconds(3);
+    }
 
 
     //Movement Rigidbody
@@ -126,5 +131,5 @@ public class BallController : MonoBehaviour
         rig.velocity *= magnitude;
     }
 
- 
+
 }

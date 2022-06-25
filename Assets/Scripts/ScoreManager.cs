@@ -6,28 +6,23 @@ using UnityEngine.SceneManagement;
 
 public class ScoreManager : MonoBehaviour
 {
-    public int rightScore;
-    public int leftScore;
-    public int upScore;
-    public int downScore;
+    
+    public int rightScore, leftScore, upScore, downScore;
 
-    public int maxScore;
+    [SerializeField]
+    private int maxScore;
 
-    public BallController ball;
+    [SerializeField]
+    private BallController ball;
 
 
     //Wall
-    public GameObject upWall;
-    public GameObject rightWall;
-    public GameObject downWall;
-    public GameObject leftWall;
+    [SerializeField]
+    public GameObject upWall, rightWall, downWall, leftWall;
 
-    public Text Ranking1;
-    public Text Ranking2;
-    public Text Ranking3;
-    public Text Ranking4;
+    [SerializeField]
+    public Text Ranking1, Ranking2, Ranking3, Ranking4;
 
-  
 
     public GameObject highScore;
 
